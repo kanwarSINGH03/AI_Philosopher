@@ -27,7 +27,7 @@ export function MessagesProvider({ children }: { children: ReactNode }) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: nanoid(),
-      text: "I am a Philosopher, what do you need!!",
+      text: "What is that you are require today!! O Seeker of Truth!!",
       isUserMessage: false,
     },
   ]);
