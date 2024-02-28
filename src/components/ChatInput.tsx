@@ -6,6 +6,8 @@ import { useMutation } from "react-query";
 import { nanoid } from "nanoid";
 import { Message } from "@/lib/validators/message";
 import { MessagesContext } from "@/context/messages";
+import {Button} from "@/components/ui/button";
+
 
 interface ChatInputProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -69,37 +71,55 @@ export default function ChatInput({ className, ...props }: ChatInputProps) {
         textareaRef.current?.focus();
       }, 10);
     },
+
   });
 
   return (
-    <div
-      {...props}
-      className={cn("w-full rounded-lg border-none outline-none", className)}
-    >
-      <TextareaAutosize
-        ref={textareaRef}
-        rows={2}
-        maxRows={4}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
-            const message: Message = {
-              id: nanoid(),
-              isUserMessage: true,
-              text: input,
-            };
-            sendMessage(message);
-          }
-        }}
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        autoFocus
-        placeholder={"Present your Thoughts...."}
-        spellCheck={false}
-        className={
-          "w-full min-h-[80px] bg-white bg-opacity-80 rounded-lg shadow-lg p-2 text-gray-950 placeholder-gray-950 focus:ring-0"
-        }
-      />
-    </div>
+      <div
+          {...props}
+          className={cn("relative flex items-center w-full rounded-lg border-none outline-none", className)}
+      >
+
+        <TextareaAutosize
+            ref={textareaRef}
+            rows={2}
+            maxRows={4}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                const message: Message = {
+                  id: nanoid(),
+                  isUserMessage: true,
+                  text: input,
+                };
+                sendMessage(message);
+              }
+            }}
+            disabled={isLoading}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            autoFocus
+            placeholder={"Present your Thoughts...."}
+            spellCheck={false}
+            className={ cn(
+              "w-full min-h-[80px] bg-white bg-opacity-80 rounded-lg shadow-lg p-2 text-gray-950 placeholder-gray-950 focus:ring-0",
+                isLoading && 'animate-blink')
+            }
+
+        />
+
+        <Button onClick={event => {
+          event.preventDefault();
+          const message: Message = {
+            id: nanoid(),
+            isUserMessage: true,
+            text: input,
+          };
+          sendMessage(message);
+        }}  className="absolute right-4 bottom-4 bg-blue-500 hover:bg-blue-50 text-white font-bold rounded">
+          SEND
+        </Button>
+
+      </div>
   );
 }
