@@ -71,6 +71,11 @@ export default function ChatInput({ className, ...props }: ChatInputProps) {
         textareaRef.current?.focus();
       }, 10);
     },
+    onError(_, message){
+      alert("Try Again!! Error in thinking")
+      removeMessage(message.id)
+      textareaRef.current?.focus()
+    }
 
   });
 
