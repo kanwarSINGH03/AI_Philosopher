@@ -33,6 +33,11 @@ export default function ChatInput({ className, ...props }: ChatInputProps) {
       });
       return response.body;
     },
+
+    onMutate(message){
+      addMessage(message)
+    },//to display ussr's messages as well
+
     onSuccess: async (stream) => {
       if (!stream) throw new Error("No stream found");
 

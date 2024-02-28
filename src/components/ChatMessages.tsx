@@ -36,11 +36,19 @@ export default function ChatMessages({
             )}
           >
             <div
-              className={cn("rounded-lg px-4 py-2 shadow", "max-w-xs mx-2", {
+              className={cn("rounded-lg p-2 shadow", "max-w-xs mx-2", {
                 "bg-blue-500 text-white": message.isUserMessage,
                 "bg-gray-100 text-gray-800": !message.isUserMessage,
               })}
             >
+              <p className={cn('rounded-lg',
+                  {
+                "bg-blue-500 text-white": message.isUserMessage,
+                "bg-gray-100 text-gray-800": !message.isUserMessage,
+              }
+              )}>
+
+              </p>
               {message.text}
             </div>
           </div>
