@@ -6,7 +6,7 @@ import ChatMessages from "@/components/ChatMessages";
 
 export default function Chat() {
   return (
-    <div className={"w-full m-2"}>
+    <div className={"w-full m-12"}>
       <ChatMessages className={"flex items-stretch m-2 max-h-[500px] min-h-[500px]"} />
       <ChatInput className={"flex items-stretch m-2"} />
     </div>
